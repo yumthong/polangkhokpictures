@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding/Event Booking - Polangkhok Pictures</title>
+    <style>
+      :root {
+        --primary-color: #4a6baf;
+        --secondary-color: #f5f7fa;
+        --accent-color: #ff6b6b;
+        --text-color: #333;
+        --light-text: #777;
+        --border-color: #ddd;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo {
+        max-width: 200px;
+        margin-bottom: 15px;
+      }
+
+      h1 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+
+      .form-section {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-bottom: 20px;
+      }
+
+      .section-title {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .required-field::after {
+        content: " *";
+        color: var(--accent-color);
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"],
+      input[type="file"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border 0.3s;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(74, 107, 175, 0.2);
+      }
+
+      .radio-group,
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .radio-option,
+      .checkbox-option {
+        display: flex;
+        align-items: center;
+      }
+
+      .radio-option input,
+      .checkbox-option input {
+        margin-right: 10px;
+      }
+
+      .submit-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%;
+      }
+
+      .submit-btn:hover {
+        background-color: #3a5a9f;
+      }
+
+      .two-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .three-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+      }
+
+      .terms-box {
+        border: 1px solid var(--border-color);
+        padding: 15px;
+        border-radius: 4px;
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 15px;
+        background-color: #f9f9f9;
+      }
+
+      .terms-box ol {
+        padding-left: 20px;
+      }
+
+      .terms-box li {
+        margin-bottom: 10px;
+      }
+
+      .file-upload {
+        padding: 20px;
+        border: 2px dashed var(--border-color);
+        border-radius: 4px;
+        text-align: center;
+        cursor: pointer;
+        transition: border 0.3s;
+      }
+
+      .file-upload:hover {
+        border-color: var(--primary-color);
+      }
+
+      .file-name {
+        margin-top: 10px;
+        font-size: 14px;
+        color: var(--light-text);
+      }
+
+      @media (max-width: 768px) {
+        .two-columns,
+        .three-columns {
+          grid-template-columns: 1fr;
+        }
+
+        .form-section {
+          padding: 20px;
+        }
+      }
+
+      .error-message {
+        color: var(--accent-color);
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .success-message {
+        display: none;
+        background-color: #d4edda;
+        color: #155724;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      :root {
+        --primary-color: #4a6baf;
+        --secondary-color: #f5f7fa;
+        --accent-color: #ff6b6b;
+        --text-color: #333;
+        --light-text: #777;
+        --border-color: #ddd;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .form-section,
+      .preview-section {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-bottom: 20px;
+      }
+
+      .preview-section {
+        display: none;
+      }
+
+      .preview-item {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .preview-label {
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-bottom: 5px;
+      }
+
+      .preview-value {
+        margin-left: 10px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- Replace with your actual logo -->
+        <img
+          src="\Media\logo.png"
+          alt="Polangkhok Pictures Logo"
+          class="logo"
+        />
+        <h1>Wedding/Event Booking Form</h1>
+      </header>
+
+      <div class="success-message">
+        Thank you for your booking! We will review your details and contact you
+        shortly.
+      </div>
+
+      <form id="weddingBookingForm">
+        <div class="form-section">
+          <h2 class="section-title">Event Details</h2>
+
+          <div class="form-group">
+            <label for="weddingDate" class="required-field"
+              >Date of Wedding (Luhongba Numit)</label
+            >
+            <input type="date" id="weddingDate" name="weddingDate" required />
+            <div class="error-message">Please select the wedding date</div>
+          </div>
+
+          <div class="form-group three-columns">
+            <div>
+              <label for="heijingpotDate"
+                >Heijingpot Numit (for Meitei only)</label
+              >
+              <input type="date" id="heijingpotDate" name="heijingpotDate" />
+            </div>
+            <div>
+              <label for="chakoubaDate">Chakouba Numit (for Meitei only)</label>
+              <input type="date" id="chakoubaDate" name="chakoubaDate" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="required-field"
+              >Ceremony Location / Bride's Residence</label
+            >
+            <div class="form-group">
+              <input
+                type="text"
+                id="ceremonyStreet"
+                name="ceremonyStreet"
+                placeholder="Street Address"
+                required
+              />
+              <div class="error-message">Please enter street address</div>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="ceremonyAddress2"
+                name="ceremonyAddress2"
+                placeholder="Address Line 2"
+              />
+            </div>
+            <div class="two-columns">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="ceremonyCity"
+                  name="ceremonyCity"
+                  placeholder="City"
+                  required
+                />
+                <div class="error-message">Please enter city</div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="ceremonyState"
+                  name="ceremonyState"
+                  placeholder="State/Region/Province"
+                  required
+                />
+                <div class="error-message">Please enter state/region</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="ceremonyPostal"
+                name="ceremonyPostal"
+                placeholder="Postal / Zip Code"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="receptionLocation">Reception Location</label>
+            <select id="receptionLocation" name="receptionLocation">
+              <option value="">Same as Ceremony Location</option>
+              <option value="other">Other Location</option>
+            </select>
+          </div>
+
+          <div id="otherLocationFields" style="display: none">
+            <div class="form-group">
+              <input
+                type="text"
+                id="receptionStreet"
+                name="receptionStreet"
+                placeholder="Street Address"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="receptionAddress2"
+                name="receptionAddress2"
+                placeholder="Address Line 2"
+              />
+            </div>
+            <div class="two-columns">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="receptionCity"
+                  name="receptionCity"
+                  placeholder="City"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="receptionState"
+                  name="receptionState"
+                  placeholder="State/Region/Province"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="receptionPostal"
+                name="receptionPostal"
+                placeholder="Postal / Zip Code"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h2 class="section-title">Groom's Information</h2>
+
+          <div class="three-columns">
+            <div class="form-group">
+              <label for="groomFirstName" class="required-field"
+                >First Name</label
+              >
+              <input type="text" id="groomFirstName" name="groomFirstName
+              required />
+              <div class="error-message">Please enter first name</div>
+            </div>
+            <div class="form-group">
+              <label for="groomMiddleName">Middle Name</label>
+              <input type="text" id="groomMiddleName" name="groomMiddleName" />
+            </div>
+            <div class="form-group">
+              <label for="groomLastName" class="required-field"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                id="groomLastName"
+                name="groomLastName"
+                required
+              />
+              <div class="error-message">Please enter last name</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="groomPhone" class="required-field"
+              >Mobile Number (groom's)</label
+            >
+            <div style="display: flex">
+              <select style="width: 80px; margin-right: 10px">
+                <option>+91</option>
+                <!-- Other country codes can be added here -->
+              </select>
+              <input
+                type="tel"
+                id="groomPhone"
+                name="groomPhone"
+                style="flex: 1"
+                required
+              />
+            </div>
+            <div class="error-message">Please enter valid phone number</div>
+          </div>
+
+          <div class="form-section">
+            <h2 class="section-title">Bride's Information</h2>
+
+            <div class="three-columns">
+              <div class="form-group">
+                <label for="brideFirstName" class="required-field"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  id="brideFirstName"
+                  name="brideFirstName"
+                  required
+                />
+                <div class="error-message">Please enter first name</div>
+              </div>
+              <div class="form-group">
+                <label for="brideMiddleName">Middle Name</label>
+                <input
+                  type="text"
+                  id="brideMiddleName"
+                  name="brideMiddleName"
+                />
+              </div>
+              <div class="form-group">
+                <label for="brideLastName" class="required-field"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  id="brideLastName"
+                  name="brideLastName"
+                  required
+                />
+                <div class="error-message">Please enter last name</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bridePhone" class="required-field"
+                >Mobile Number (Bride's)</label
+              >
+              <div style="display: flex">
+                <select style="width: 80px; margin-right: 10px">
+                  <option>+91</option>
+                  <!-- Other country codes can be added here -->
+                </select>
+                <input
+                  type="tel"
+                  id="bridePhone"
+                  name="bridePhone"
+                  style="flex: 1"
+                  required
+                />
+              </div>
+              <div class="error-message">Please enter valid phone number</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2 class="section-title">Terms and Conditions</h2>
+
+          <div class="terms-box">
+            <ol>
+              <li>
+                Client can make a booking fee to retain the team of Polangkhok
+                Pictures to perform the services. The booking fee is 20% of the
+                package price and is non-refundable.
+              </li>
+              <li>
+                Remaining i.e. 80% of the total amount must be cleared on or
+                before the Wedding/Event day as per the Industry norms of
+                Photography.
+              </li>
+              <li>
+                '4x6 Photo Prints and Frames' will be delivered within 5 days.
+                'Video & Photobook' could take up to 2-6 months during busy
+                periods. We will endeavor to deliver complete deliverables as
+                quickly as possible (within 6 weeks).
+              </li>
+              <li>
+                All Packages include all team expenses (travel and activities).
+                Additional charges may apply for any other extra activities due
+                to alterations to the original brief by the Client(s). And fuel
+                charges may apply for distances above 20 km.
+              </li>
+              <li>
+                If the Client delays payment, Polangkhok Pictures will not
+                process raw files and deliver any items (printed photos and
+                other deliverable items) to the client until the balance is paid
+                in full. An additional late fee will be charged at 0.5% of the
+                full price per day.
+              </li>
+              <li>
+                In the event that the families/guests are taking photos,
+                Polangkhok Pictures is not responsible for obstructed photos and
+                photos ruined due to any behavior from guests' activities by
+                other vendors and venue staff.
+              </li>
+              <li>
+                The client is responsible for taking care of pets and children.
+                Clients will be charged for any equipment damage caused due to
+                pets, children, or any other unforeseen incident during the
+                photo shoot or consultation session.
+              </li>
+              <li>
+                Package prices are subject to change due to fluctuations in
+                taxes and market prices (digital printing services).
+              </li>
+            </ol>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-option">
+              <input
+                type="checkbox"
+                id="agreeTerms"
+                name="agreeTerms"
+                required
+              />
+              <label for="agreeTerms" class="required-field"
+                >I accept the Terms and Conditions</label
+              >
+            </div>
+            <div class="error-message">
+              You must accept the terms and conditions
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section" id="formEntry">
+          <h2 class="section-title">Package Selection</h2>
+
+          <div class="form-group">
+            <label for="package" class="required-field"
+              >Package (Pricing)</label
+            >
+            <select id="package" name="package" required>
+              <option value="">Select your chosen package</option>
+              <option value="basic">Basic Package - ₹XX,XXX</option>
+              <option value="standard">Standard Package - ₹XX,XXX</option>
+              <option value="premium">Premium Package - ₹XX,XXX</option>
+              <option value="custom">Custom Package</option>
+            </select>
+            <div class="error-message">Please select a package</div>
+          </div>
+
+          <div class="form-group">
+            <label for="paymentProof" class="required-field"
+              >File Upload (Payment Proof)</label
+            >
+            <div
+              class="file-upload"
+              onclick="document.getElementById('paymentProof').click()"
+            >
+              <p>Click to upload payment screenshot</p>
+              <p class="file-name" id="fileName">No file chosen</p>
+              <input
+                type="file"
+                id="paymentProof"
+                name="paymentProof"
+                style="display: none"
+                required
+              />
+            </div>
+            <p
+              style="font-size: 14px; color: var(--light-text); margin-top: 5px"
+            >
+              All file types are accepted. eg.: jpg, png, pdf, etc.
+            </p>
+            <div class="error-message">Please upload payment proof</div>
+          </div>
+
+          <div class="button-group">
+            <button type="button" id="previewBtn" class="btn btn-primary">
+              Preview Booking
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="preview-section" id="previewSection">
+          <h2>Review Your Booking Details</h2>
+
+          <div id="previewContent">
+            <!-- Preview content will be inserted here by JavaScript -->
+          </div>
+
+          <div class="button-group">
+            <button type="button" id="editBtn" class="btn btn-outline">
+              Edit Details
+            </button>
+            <button type="button" id="submitBtn" class="btn btn-primary">
+              Confirm & Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // Store form data
+      let formData = {};
+
+      // DOM elements
+      const form = document.getElementById("weddingBookingForm");
+      const formEntry = document.getElementById("formEntry");
+      const previewSection = document.getElementById("previewSection");
+      const previewContent = document.getElementById("previewContent");
+      const previewBtn = document.getElementById("previewBtn");
+      const editBtn = document.getElementById("editBtn");
+      const submitBtn = document.getElementById("submitBtn");
+      const successMessage = document.getElementById("successMessage");
+
+      // Preview button click handler
+      previewBtn.addEventListener("click", function () {
+        if (validateForm()) {
+          // Collect all form data
+          collectFormData();
+
+          // Generate preview HTML
+          generatePreview();
+
+          // Show preview section
+          formEntry.style.display = "none";
+          previewSection.style.display = "block";
+        }
+      });
+
+      // Edit button click handler
+      editBtn.addEventListener("click", function () {
+        // Return to form
+        previewSection.style.display = "none";
+        formEntry.style.display = "block";
+      });
+
+      // Submit button click handler
+      submitBtn.addEventListener("click", function () {
+        // Here you would normally send the data to your server
+        // For demo, we'll just show success message
+
+        // Hide preview and form
+        previewSection.style.display = "none";
+        formEntry.style.display = "none";
+
+        // Show success message
+        successMessage.style.display = "block";
+
+        // In a real app, you would submit to your backend here
+        // submitToBackend(formData);
+      });
+
+      // Collect all form data
+      function collectFormData() {
+        formData = {
+          // Event Details
+          weddingDate: document.getElementById("weddingDate").value,
+          heijingpotDate: document.getElementById("heijingpotDate").value,
+          chakoubaDate: document.getElementById("chakoubaDate").value,
+          ceremonyStreet: document.getElementById("ceremonyStreet").value,
+          ceremonyAddress2: document.getElementById("ceremonyAddress2").value,
+          ceremonyCity: document.getElementById("ceremonyCity").value,
+          ceremonyState: document.getElementById("ceremonyState").value,
+          ceremonyPostal: document.getElementById("ceremonyPostal").value,
+          receptionLocation: document.getElementById("receptionLocation").value,
+          receptionStreet: document.getElementById("receptionStreet").value,
+          receptionAddress2: document.getElementById("receptionAddress2").value,
+          receptionCity: document.getElementById("receptionCity").value,
+          receptionState: document.getElementById("receptionState").value,
+          receptionPostal: document.getElementById("receptionPostal").value,
+
+          // Bride's Information
+          brideFirstName: document.getElementById("brideFirstName").value,
+          brideMiddleName: document.getElementById("brideMiddleName").value,
+          brideLastName: document.getElementById("brideLastName").value,
+          bridePhone: document.getElementById("bridePhone").value,
+
+          // Package Selection
+          package: document.getElementById("package").value,
+
+          // Terms
+          agreeTerms: document.getElementById("agreeTerms").checked,
+        };
+
+        // Handle file upload preview
+        const fileInput = document.getElementById("paymentProof");
+        if (fileInput.files.length > 0) {
+          formData.paymentProof = fileInput.files[0].name;
+        } else {
+          formData.paymentProof = "No file uploaded";
+        }
+      }
+
+      // Generate preview HTML
+      function generatePreview() {
+        let html = `
+                <div class="preview-item">
+                    <div class="preview-label">Wedding Date</div>
+                    <div class="preview-value">${formatDate(
+                      formData.weddingDate
+                    )}</div>
+                </div>
+                
+                ${
+                  formData.heijingpotDate
+                    ? `
+                <div class="preview-item">
+                    <div class="preview-label">Heijingpot Numit</div>
+                    <div class="preview-value">${formatDate(
+                      formData.heijingpotDate
+                    )}</div>
+                </div>
+                `
+                    : ""
+                }
+                
+                ${
+                  formData.chakoubaDate
+                    ? `
+                <div class="preview-item">
+                    <div class="preview-label">Chakouba Numit</div>
+                    <div class="preview-value">${formatDate(
+                      formData.chakoubaDate
+                    )}</div>
+                </div>
+                `
+                    : ""
+                }
+                
+                <div class="preview-item">
+                    <div class="preview-label">Ceremony Location</div>
+                    <div class="preview-value">
+                        ${formData.ceremonyStreet}<br>
+                        ${
+                          formData.ceremonyAddress2
+                            ? formData.ceremonyAddress2 + "<br>"
+                            : ""
+                        }
+                        ${formData.ceremonyCity}, ${formData.ceremonyState}<br>
+                        ${formData.ceremonyPostal}
+                    </div>
+                </div>
+                
+                <div class="preview-item">
+                    <div class="preview-label">Reception Location</div>
+                    <div class="preview-value">
+                        ${
+                          formData.receptionLocation === "other"
+                            ? `
+                            ${formData.receptionStreet}<br>
+                            ${
+                              formData.receptionAddress2
+                                ? formData.receptionAddress2 + "<br>"
+                                : ""
+                            }
+                            ${formData.receptionCity}, ${
+                                formData.receptionState
+                              }<br>
+                            ${formData.receptionPostal}
+                        `
+                            : "Same as Ceremony Location"
+                        }
+                    </div>
+                </div>
+                
+                <div class="preview-item">
+                    <div class="preview-label">Bride's Name</div>
+                    <div class="preview-value">
+                        ${formData.brideFirstName} 
+                        ${
+                          formData.brideMiddleName
+                            ? formData.brideMiddleName + " "
+                            : ""
+                        }
+                        ${formData.brideLastName}
+                    </div>
+                </div>
+                
+                <div class="preview-item">
+                    <div class="preview-label">Bride's Phone</div>
+                    <div class="preview-value">+91 ${formData.bridePhone}</div>
+                </div>
+                
+                <div class="preview-item">
+                    <div class="preview-label">Selected Package</div>
+                    <div class="preview-value">${formData.package}</div>
+                </div>
+                
+                <div class="preview-item">
+                    <div class="preview-label">Payment Proof</div>
+                    <div class="preview-value">${formData.paymentProof}</div>
+                </div>
+                
+                <div class="preview-item">
+                    <div class="preview-label">Terms Accepted</div>
+                    <div class="preview-value">${
+                      formData.agreeTerms ? "Yes" : "No"
+                    }</div>
+                </div>
+            `;
+
+        previewContent.innerHTML = html;
+      }
+
+      // Format date for display
+      function formatDate(dateString) {
+        if (!dateString) return "Not specified";
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(dateString).toLocaleDateString("en-US", options);
+      }
+
+      // Basic form validation
+      function validateForm() {
+        let isValid = true;
+
+        // Check required fields
+        const requiredFields = form.querySelectorAll("[required]");
+        requiredFields.forEach((field) => {
+          const errorMsg =
+            field.parentElement.querySelector(".error-message") ||
+            field.parentElement.parentElement.querySelector(".error-message");
+
+          if (field.type === "checkbox" && !field.checked) {
+            errorMsg.style.display = "block";
+            isValid = false;
+          } else if (field.type !== "checkbox" && !field.value) {
+            errorMsg.style.display = "block";
+            field.style.borderColor = "var(--accent-color)";
+            isValid = false;
+          } else {
+            if (errorMsg) errorMsg.style.display = "none";
+            if (field.style) field.style.borderColor = "var(--border-color)";
+          }
+        });
+
+        return isValid;
+      }
+
+      // Initialize event listeners for other form functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        // Show/hide other location fields based on selection
+        document
+          .getElementById("receptionLocation")
+          .addEventListener("change", function () {
+            const otherLocationFields = document.getElementById(
+              "otherLocationFields"
+            );
+            otherLocationFields.style.display =
+              this.value === "other" ? "block" : "none";
+          });
+
+        // Display selected file name
+        document
+          .getElementById("paymentProof")
+          .addEventListener("change", function () {
+            const fileName = this.files[0]
+              ? this.files[0].name
+              : "No file chosen";
+            document.getElementById("fileName").textContent = fileName;
+          });
+      });
+    </script>
+  </body>
+</html>
